@@ -64,10 +64,10 @@
                             </div>
                             <div class="media-content">
                                 <div class="content">
-                                    <p>
-                                        <span class="title">{{ city_weather.city }}</span>
+                                    <p style="color:white">
+                                        <span class="title" style="color:white">{{ city_weather.city }}</span>
                                         <br>
-                                        <span class="subtitle">{{ city_weather.temperature }}° C</span>
+                                        <span class="subtitle" style="color:white">{{ city_weather.temperature }}° C</span>
                                         <br> {{ city_weather.description }}
                                     </p>
                                 </div>
@@ -87,7 +87,12 @@
     </div>
     <footer class="footer" style="background: linear-gradient(to left, #3e9da5, #f33bff)">
         <p  class="container has-text-centered" style="color:white">
-            <a style="font-weight: 500; color:white" target="_blank" href="https://github.com/llnvs/django-weather">&copy; Follow my github account 😎😎😎</a> 
+            <a 
+                style="font-weight: 500; color:white" 
+                target="_blank"
+                href="https://github.com/llnvs/django-weather">
+                    &copy; Follow my github account 😎😎😎
+            </a> 
         </p>
     </footer>
 </body>
