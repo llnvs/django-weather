@@ -1,4 +1,5 @@
 import requests
+from datetime import datetime
 from django.shortcuts import render, redirect
 from .models import City
 from .forms import CityForm
@@ -9,6 +10,9 @@ def index(request):
     message = ''
     message_class = ''
     url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=1864d344e8594dc173ad24e5b1e2fe4c'
+    url2 = 'http://api.openweathermap.org/data/2.5/forecast?cnt=24&q={}&units=metric&appid=1864d344e8594dc173ad24e5b1e2fe4c'
+    print('<><><><><><>')
+    aaa = requests.get(url2.format('London')).json()
 
     if request.method == 'POST':
         form = CityForm(request.POST)
@@ -48,7 +52,6 @@ def index(request):
         }
 
         weather_data.append(city_weather)
-    print('>>>>>>>>>>', message)
     context = {
       'weather_data' : weather_data,
       'form': form,
@@ -61,3 +64,22 @@ def index(request):
 def delete_city(request, city):
     City.objects.get(name=city).delete()
     return redirect('home')
+
+def detail_city(request, city):
+    city = City.objects.get(name=city)
+    url2 = 'http://api.openweathermap.org/data/2.5/forecast?cnt=24&q={}&units=metric&appid=1864d344e8594dc173ad24e5b1e2fe4c'
+
+    forecast_response = requests.get(url2.format(city)).json()
+    forecast = forecast_response['list']
+    times = []
+    temperatures = []
+    for item in forecast:
+        times.append(item['dt'])
+        temperatures.append(item['main']['temp'])
+
+    context = {
+      'temperatures' : temperatures,
+      'times': times,
+      'city_name': city
+    }
+    return render(request, 'details.html', context)

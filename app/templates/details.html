@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Погода в мире</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+    <style>
+        .heroo {
+         background: linear-gradient(to left, #3e9da5, #3b80ff);
+         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+       </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+
+<body>
+    <div style="min-height: 100vh; background: #0079ff70; position: relative;">
+    <section class="hero is-primary">
+        <div class="hero-body heroo">
+            <div class="container" >
+                <h1 class="title">
+                    Weather in {{city_name}}
+                </h1>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-2 is-8">
+                  <canvas id="myChart"></canvas>
+                  <script>
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var chart = new Chart(ctx, {
+                        // The type of chart we want to create
+                        type: 'line',
+
+                        // The data for our dataset
+                        data: {
+                            labels: {{ times}}.map( t => new Date(t * 1000).toLocaleTimeString("en-US")),
+                            datasets: [{
+                                label: `{{ city_name }}`,
+                                borderColor: 'rgb(0, 139, 255)',
+                                data: {{ temperatures }}
+                            }]
+                        },
+
+                        // Configuration options go here
+                        options: {}
+                    });
+                  </script>
+                </div>
+            </div>
+        </div>
+    </section>
+    </div>
+    <footer class="footer" style="background: linear-gradient(to left, #3e9da5, #3b80ff)">
+        <p  class="container has-text-centered" style="color:white">
+            <a 
+                style="font-weight: 500; color:white" 
+                target="_blank"
+                href="https://github.com/llnvs/django-weather">
+                    &copy; Follow my github account 👻
+            </a> 
+        </p>
+    </footer>
+</body>
+</html>

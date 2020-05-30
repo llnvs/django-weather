@@ -65,7 +65,9 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p style="color:white">
-                                        <span class="title" style="color:white">{{ city_weather.city }}</span>
+                                        <a href="{% url 'detail_city' city_weather.city %}">
+                                            <span class="title" style="color:white">{{ city_weather.city }}</span>
+                                        </a>
                                         <br>
                                         <span class="subtitle" style="color:white">{{ city_weather.temperature }}° C</span>
                                         <br> {{ city_weather.description }}
@@ -91,10 +93,9 @@
                 style="font-weight: 500; color:white" 
                 target="_blank"
                 href="https://github.com/llnvs/django-weather">
-                    &copy; Follow my github account 😎😎😎
+                    &copy; Follow my github account 👻
             </a> 
         </p>
     </footer>
 </body>
-
 </html>
